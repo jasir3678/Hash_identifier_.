@@ -1,0 +1,21 @@
+def identify_hash(hash_value):
+    # Clean input hash value (strip spaces, etc.)
+    hash_value = hash_value.strip().lower()
+
+    # Regular expressions for detecting specific hash patterns
+    hash_patterns = {
+        'MD5': r'^[a-f0-9]{32}$',  # MD5: 32 hexadecimal characters
+        'SHA1': r'^[a-f0-9]{40}$', # SHA1: 40 hexadecimal characters
+        'SHA256': r'^[a-f0-9]{64}$', # SHA256: 64 hexadecimal characters
+        'SHA512': r'^[a-f0-9]{128}$', # SHA512: 128 hexadecimal characters
+        'SHA224': r'^[a-f0-9]{56}$', # SHA224: 56 hexadecimal characters
+        'SHA384': r'^[a-f0-9]{96}$', # SHA384: 96 hexadecimal characters
+    }
+
+    # Iterate through the patterns to find a match
+    for hash_type, pattern in hash_patterns.items():
+        if re.match(pattern, hash_value):
+            return hash_type
+
+    # If no match is found, return 'Unknown hash type'
+    return 'Unknown hash type'
